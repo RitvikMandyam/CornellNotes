@@ -13,3 +13,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 - Add a way to insert numbered/bulleted lists into notes.
 - Add support for inserting pictures - who doesn't like pretty pictures in their long, boring lecture notes? Also, digital doodles!
 - Add a way to quickly input mathematical formulae - no one wants to hunt around their keyboard for a sigma sign.
+
+## Pull requests
+Feel free to submit pull requests. I really only work on this when I suddenly get bursts of energy and inspiration, which is not often. I mean, I open-sourced this primarily because I'm way too busy (read: lazy) to actually do a good job of it.
