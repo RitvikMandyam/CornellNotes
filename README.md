@@ -6,7 +6,7 @@ Allows you to take Cornell Notes-style notes. Written in Angular. Began as my at
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-##ToDo
+## ToDo
 - Build tests - what kind of good app doesn't have tests? The kind written by a lazy college student like me during his free time, that's what kind.
 - Finish documentation - I like to pretend my code is self-documented. I don't know who I think I'm kidding.
 - Migrate saving of notes from LocalStorage to, like, Firebase or Google Drive or something - who even saves notes locally? Do you WANT to lose all your notes?
