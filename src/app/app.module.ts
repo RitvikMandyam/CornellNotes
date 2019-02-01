@@ -15,7 +15,6 @@ import {NoteTakingToolbarComponent} from './note-taking-toolbar/note-taking-tool
 import { NoteViewComponent } from './note-view/note-view.component';
 import { NotesListComponent } from './notes-list/notes-list.component';
 import { NoteTileComponent } from './note-tile/note-tile.component';
-import { TextListComponent } from './text-list/text-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { TextListComponent } from './text-list/text-list.component';
     NoteViewComponent,
     NotesListComponent,
     NoteTileComponent,
-    TextListComponent,
   ],
   imports: [
     BrowserModule,
