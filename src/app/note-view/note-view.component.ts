@@ -97,7 +97,7 @@ export class NoteViewComponent implements OnInit, AfterViewInit {
     // Updates this particular note in localStorage. This is the function to change to switch to Firebase.
     this.db.collection('users').doc(this.user.uid).collection('notes').get()
       .subscribe((notesQuery) => {
-        const notes: Note[] = notesQuery.docs.length > 0 ? notesQuery.docs as unknown as Note[] : [];
+        const notes: Note[] = notesQuery.docs.length > 0 ? notesQuery.docs.map(e => e.data()) as unknown as Note[] : [];
         let noteIndex = notes.findIndex(e => e.name === this.note.name);
 
         for (let i = 0; i < this.mementosUndoStack.length; i++) {
@@ -136,11 +136,8 @@ export class NoteViewComponent implements OnInit, AfterViewInit {
             this.mementosRedoStack[i] = JSON.stringify(mementoObject);
           }
         }
-        if (noteIndex > 0) {
-          notes.splice(noteIndex, 1, this.note);
-        } else {
+        if (noteIndex < 0) {
           noteIndex = notes.length;
-          notes.push(this.note);
         }
         this.db.collection('users').doc(this.user.uid).collection('notes').doc(noteIndex.toString()).set(this.note);
       });
