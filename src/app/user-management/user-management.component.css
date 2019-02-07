@@ -1,0 +1,14 @@
+.user-management-wrapper {
+  position: relative;
+}
+
+.user-management-dropdown {
+  position: absolute;
+  background-color: #fafafa;
+  padding: 16px;
+  color: black;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  display: flex;
+  flex-flow: column nowrap;
+  z-index: 100;
+}

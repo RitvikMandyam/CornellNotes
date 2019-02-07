@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <div class="toolbar-note-title" contenteditable="true" [(ngModel)]="note.name"></div>
+  <app-user-management [user]="user"></app-user-management>
+  <div class="action-button-container">
+    <div class="editor-tools-container">
+      <button mat-icon-button matTooltip="Undo swap" [disabled]="isUndoSwapDisabled" (click)="undoSwapAction()">
+        <mat-icon>undo</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Redo swap" [disabled]="isRedoSwapDisabled" (click)="redoSwapAction()">
+        <mat-icon>redo</mat-icon>
+      </button>
+    </div>
+    <button mat-icon-button routerLink="/notes" matTooltip="Return to notes list" matTooltipPosition="before">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

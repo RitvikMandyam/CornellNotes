@@ -1,0 +1,9 @@
+<app-note-taking-toolbar [note]="note" [isUndoSwapDisabled]="shouldDisableUndo()" [isRedoSwapDisabled]="shouldDisableRedo()" (undoSwap)="undoSwap()" (redoSwap)="redoSwap()" [user]="user"></app-note-taking-toolbar>
+<div class="note-taking-area" cdkDropList cdkDropListLockAxis="y" (cdkDropListDropped)="drop($event)">
+  <app-recall-note-pair *ngFor="let recallNotePair of note.recallNotePairs; let i=index"
+                        [recallNotePair]="recallNotePair" (focusPreviousRecallNotePair)="focusPreviousPairNotes(i)"
+                        (insertNextRecallNotePair)="addEmptyRecallNotePair(i)" (dataChanged)="saveRecallNotePairs()" cdkDrag>
+    <!-- HACK ALERT! Projecting this into the component because Drag and Drop can only use immediate children (ie not in components) as handle-->
+    <div class="text-padding pair-index" cdkDragHandle> {{ recallNotePair.index }}. </div>
+  </app-recall-note-pair>
+</div>

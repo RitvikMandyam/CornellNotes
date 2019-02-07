@@ -1,0 +1,35 @@
+div {
+  outline: none;
+}
+
+.text-padding {
+  padding: 2px;
+}
+
+.pair-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+}
+
+.pair-recall {
+  flex: 12;
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  margin-right: 16px;
+  margin-bottom: 0;
+  white-space: pre-wrap;
+}
+
+.pair-notes {
+  flex: 36;
+  overflow: auto;
+  padding-right: 4px;
+  white-space: pre-wrap;
+}
+
+.pair-actions {
+  position: absolute;
+  right: 0;
+}

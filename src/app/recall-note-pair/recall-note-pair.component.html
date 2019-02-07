@@ -1,0 +1,5 @@
+<div class="pair-wrapper">
+  <ng-content></ng-content>
+  <div #recall class="text-padding pair-recall" [class.mat-headline]="recallNotePair.notes === ''" propValueAccessor="innerHTML" contenteditable="true" (keyup)="dataChangedAction()" (keydown.control.Enter)="shiftFocusToNotes()" (keydown.control.Shift.Enter)="shiftFocusToPreviousPair()" (keydown.shift.tab)="shiftFocusToPreviousPair()" [(ngModel)]="recallNotePair.recall" ngDefaultControl (focus)="isFocused = true" (blur)="isFocused = false"></div>
+  <div #notes class="text-padding pair-notes" propValueAccessor="innerHTML" contenteditable="true" (keyup)="dataChangedAction()" (keydown.control.Enter)="insertNextPair()" (keydown.control.Shift.Enter)="shiftFocusToRecall()" [(ngModel)]="recallNotePair.notes" ngDefaultControl (focus)="isFocused = true" (blur)="isFocused = false"></div>
+</div>

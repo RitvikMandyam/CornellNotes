@@ -1,0 +1,7 @@
+<div class="user-management-wrapper">
+  <img [src]="user.photoURL" class="user-image" alt="Profile picture" (click)="shouldShowManagementDropdown = !shouldShowManagementDropdown">
+</div>
+<div class="user-management-dropdown" [@slideDown]="shouldShowManagementDropdown">
+  <span class="mat-headline">Hi, {{user.displayName.split(' ')[0]}}!</span>
+  <button mat-stroked-button (click)="logout()">Sign out</button>
+</div>

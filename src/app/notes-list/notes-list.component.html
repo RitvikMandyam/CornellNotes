@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+  <span class="logo-text">CornellNotes</span>
+  <app-user-management [user]="user"></app-user-management>
+</mat-toolbar>
+<div class="notes-container">
+  <div class="add-note-button" routerLink="/note">+</div>
+  <app-note-tile *ngFor="let note of notes; let i = index" [note]="note" (click)="loadNote(i)" (delete)="deleteNote(i)"></app-note-tile>
+</div>

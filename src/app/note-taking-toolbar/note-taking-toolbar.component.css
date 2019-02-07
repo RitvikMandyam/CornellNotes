@@ -1,0 +1,42 @@
+.toolbar-container {
+  /* Wrapper div for the toolbar */
+  width: 100%;
+  background-color: #2196F3;
+  padding: 16px 0 16px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.toolbar-note-title {
+  /* Input field for the name of the note */
+  padding: 4px 4px 4px 16px;
+  flex: 1;
+  margin-left: 32px;
+  outline: none;
+  border-radius: 8px;
+  transition: all 100ms linear;
+}
+
+.toolbar-note-title:focus {
+  border: 3px solid #ffc107;
+}
+
+.action-button-container {
+  /* Area of the toolbar with buttons that actually do stuff */
+  color: white;
+  text-align: right;
+  flex: 4;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 64px;
+  padding-right: 16px;  /* Keeping things pretty. The last button tends to push right up against the right-hand edge of the toolbar, and we don't want that. */
+}
+
+.editor-tools-container {
+  /* Contains buttons that directly affect the content of the note being edited, rather than, say, return the user to the notes list. */
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}

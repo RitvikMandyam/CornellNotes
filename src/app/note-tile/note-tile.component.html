@@ -1,0 +1,9 @@
+<mat-card (mouseenter)="isNoteHovered = true" (mouseleave)="isNoteHovered = false">
+  <mat-card-header>
+    <mat-card-title>{{ note.name }}</mat-card-title>
+    <mat-card-subtitle>{{ note.createdOn | date: 'short'}}</mat-card-subtitle>
+    <button mat-button class="align-top-right" *ngIf="isNoteHovered" (click)="deleteAction($event)">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </mat-card-header>
+</mat-card>
