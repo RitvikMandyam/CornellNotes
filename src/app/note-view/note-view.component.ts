@@ -93,6 +93,19 @@ export class NoteViewComponent implements OnInit, AfterViewInit {
     }
   }
 
+  saveRename(): void {
+    this.db.collection('users').doc(this.user.uid).collection('notes').get()
+      .subscribe((notesQuery) => {
+        const notes: Note[] = notesQuery.docs.length > 0 ? notesQuery.docs.map(e => e.data()) as unknown as Note[] : [];
+        const noteIndex = notes.findIndex(e => JSON.stringify(e.recallNotePairs) === JSON.stringify(this.note.recallNotePairs));
+
+        if (noteIndex < 0) {
+          alert('Something\'s wrong! I\'m working really hard to fix it... Tomorrow. It\'s open-source code, what did you expect?');
+        }
+        this.db.collection('users').doc(this.user.uid).collection('notes').doc(noteIndex.toString()).set(this.note);
+      });
+  }
+
   saveRecallNotePairs(): void {
     // Updates this particular note in localStorage. This is the function to change to switch to Firebase.
     this.db.collection('users').doc(this.user.uid).collection('notes').get()

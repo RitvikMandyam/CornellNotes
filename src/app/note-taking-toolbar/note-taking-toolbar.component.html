@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <div class="toolbar-note-title" contenteditable="true" [(ngModel)]="note.name"></div>
+  <div class="toolbar-note-title" contenteditable="true" [(ngModel)]="note.name" (keyup)="changeAction()"></div>
   <app-user-management [user]="user"></app-user-management>
   <div class="action-button-container">
     <div class="editor-tools-container">

@@ -15,7 +15,8 @@ export class NoteTakingToolbarComponent implements OnInit {
   @Output() bulletedList = new EventEmitter();  // Emitted when a bulleted list is to be added.
   @Output() numberedList = new EventEmitter();  // Emitted when a numbered list is to be added.
   @Output() undoSwap = new EventEmitter();  // Emitted to undo the last swap.
-  @Output() redoSwap = new EventEmitter();
+  @Output() redoSwap = new EventEmitter();  // Emitted to redo the last swap.
+  @Output() change = new EventEmitter();  // Emitted to notify parent component that value has changed.
   @Input() user: User;
 
   // Emitted to redo the last swap.
@@ -30,5 +31,9 @@ export class NoteTakingToolbarComponent implements OnInit {
   }
   redoSwapAction() {
     this.redoSwap.emit();
+  }
+
+  changeAction() {
+    this.change.emit();
   }
 }
