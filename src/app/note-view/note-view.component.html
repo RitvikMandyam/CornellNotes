@@ -1,4 +1,4 @@
-<app-note-taking-toolbar [note]="note" [isUndoSwapDisabled]="shouldDisableUndo()" [isRedoSwapDisabled]="shouldDisableRedo()" (undoSwap)="undoSwap()" (redoSwap)="redoSwap()" [user]="user" (change)="saveRename()"></app-note-taking-toolbar><div class="note-taking-area" cdkDropList cdkDropListLockAxis="y" (cdkDropListDropped)="drop($event)">
+<app-note-taking-toolbar [note]="note" [isUndoSwapDisabled]="shouldDisableUndo()" [isRedoSwapDisabled]="shouldDisableRedo()" (undoSwap)="undoSwap()" (redoSwap)="redoSwap()" [user]="user" (change)="saveRecallNotePairs()"></app-note-taking-toolbar><div class="note-taking-area" cdkDropList cdkDropListLockAxis="y" (cdkDropListDropped)="drop($event)">
   <app-recall-note-pair *ngFor="let recallNotePair of note.recallNotePairs; let i=index"
                         [recallNotePair]="recallNotePair" (focusPreviousRecallNotePair)="focusPreviousPairNotes(i)"
                         (insertNextRecallNotePair)="addEmptyRecallNotePair(i)" (dataChanged)="saveRecallNotePairs()" cdkDrag>

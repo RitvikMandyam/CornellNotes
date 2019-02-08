@@ -7,6 +7,9 @@ import {RecallNotePair} from '../recall-note-pair';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {User} from 'firebase';
 import {AngularFirestore} from '@angular/fire/firestore';
+import * as firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-note-view',
@@ -47,7 +50,7 @@ export class NoteViewComponent implements OnInit, AfterViewInit {
         // If a note with the ID specified in the route exists, load it.
         const id = this.route.snapshot.paramMap.get('id');
         if (id) {
-          this.db.collection('users').doc(this.user.uid).collection('notes').doc(id).get()
+          this.db.collection(environment.firebaseCollections.users).doc(this.user.uid).collection('notes').doc(id).get()
             .subscribe((documentSnapshot) => {
               this.note = documentSnapshot.data() as unknown as Note;
               this.largestIndex = this.note.recallNotePairs[this.note.recallNotePairs.length - 1].index;
@@ -93,25 +96,12 @@ export class NoteViewComponent implements OnInit, AfterViewInit {
     }
   }
 
-  saveRename(): void {
-    this.db.collection('users').doc(this.user.uid).collection('notes').get()
-      .subscribe((notesQuery) => {
-        const notes: Note[] = notesQuery.docs.length > 0 ? notesQuery.docs.map(e => e.data()) as unknown as Note[] : [];
-        const noteIndex = notes.findIndex(e => JSON.stringify(e.recallNotePairs) === JSON.stringify(this.note.recallNotePairs));
-
-        if (noteIndex < 0) {
-          alert('Something\'s wrong! I\'m working really hard to fix it... Tomorrow. It\'s open-source code, what did you expect?');
-        }
-        this.db.collection('users').doc(this.user.uid).collection('notes').doc(noteIndex.toString()).set(this.note);
-      });
-  }
-
   saveRecallNotePairs(): void {
     // Updates this particular note in localStorage. This is the function to change to switch to Firebase.
-    this.db.collection('users').doc(this.user.uid).collection('notes').get()
+    this.db.collection(environment.firebaseCollections.users).doc(this.user.uid).collection('notes').get()
       .subscribe((notesQuery) => {
         const notes: Note[] = notesQuery.docs.length > 0 ? notesQuery.docs.map(e => e.data()) as unknown as Note[] : [];
-        let noteIndex = notes.findIndex(e => e.name === this.note.name);
+        let noteIndex = notes.findIndex(e => (e.createdOn as unknown as Timestamp).toDate().toString() === this.note.createdOn.toString());
 
         for (let i = 0; i < this.mementosUndoStack.length; i++) {
           // If we create a recall-note pair after undoing a swap, the existing swap entries don't contain it.
@@ -152,7 +142,8 @@ export class NoteViewComponent implements OnInit, AfterViewInit {
         if (noteIndex < 0) {
           noteIndex = notes.length;
         }
-        this.db.collection('users').doc(this.user.uid).collection('notes').doc(noteIndex.toString()).set(this.note);
+        this.db.collection(environment.firebaseCollections.users)
+          .doc(this.user.uid).collection('notes').doc(noteIndex.toString()).set(this.note);
       });
   }
 

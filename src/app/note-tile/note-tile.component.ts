@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Note} from '../note';
+import * as firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component({
   selector: 'app-note-tile',
@@ -15,6 +17,7 @@ export class NoteTileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.note.createdOn = (this.note.createdOn as unknown as Timestamp).toDate();
   }
   deleteAction(event) {
     event.stopPropagation();

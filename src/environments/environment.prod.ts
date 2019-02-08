@@ -7,5 +7,8 @@ export const environment = {
     projectId: 'cornell-notes-backend',
     storageBucket: 'cornell-notes-backend.appspot.com',
     messagingSenderId: '459546275907'
+  },
+  firebaseCollections: {
+    users: 'users'
   }
 };

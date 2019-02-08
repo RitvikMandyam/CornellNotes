@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {User} from 'firebase';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-notes-list',
@@ -17,17 +18,13 @@ export class NotesListComponent implements OnInit {
   user: User;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private afAuth: AngularFireAuth, private db: AngularFirestore) {
-    const notes_string = localStorage.getItem(AppStrings.local_storage_saved_notes);
-    if (notes_string) {
-      this.notes = JSON.parse(notes_string);
-    }
   }
 
   ngOnInit() {
     this.afAuth.user
       .subscribe((user) => {
         this.user = user;
-        this.db.collection('users').doc(user.uid).collection('notes').get()
+        this.db.collection(environment.firebaseCollections.users).doc(user.uid).collection('notes').get()
           .subscribe((documentsList) => {
             this.notes = documentsList.docs.map(e => e.data()) as unknown as Note[];
           });
@@ -40,13 +37,14 @@ export class NotesListComponent implements OnInit {
 
   deleteNote(index: number) {
     const deleted_note = this.notes[index];
-    this.db.collection('users').doc(this.user.uid).collection('notes').doc(index.toString()).delete()
+    this.db.collection(environment.firebaseCollections.users).doc(this.user.uid).collection('notes').doc(index.toString()).delete()
       .then(() => {
         this.notes.splice(index, 1);
         const snackbarRef = this.snackBar.open('Deleted ' + deleted_note.name, 'Undo', {duration: 10000});
         snackbarRef.onAction().subscribe(() => {
           this.notes.splice(index, 0, deleted_note);
-          this.db.collection('users').doc(this.user.uid).collection('notes').doc(index.toString()).set(deleted_note);
+          this.db.collection(environment.firebaseCollections.users).doc(this.user.uid)
+            .collection('notes').doc(index.toString()).set(deleted_note);
         });
       });
   }
