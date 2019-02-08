@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: 'note', component: NoteViewComponent},
   {path: 'note/:id', component: NoteViewComponent},
   {path: 'notes', component: NotesListComponent},
-  { path: '', redirectTo: '/note', pathMatch: 'full' },
+  { path: '', redirectTo: '/notes', pathMatch: 'full' },
 ];
 
 @NgModule({

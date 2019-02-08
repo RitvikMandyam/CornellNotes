@@ -1,8 +1,10 @@
 import {RecallNotePair} from './recall-note-pair';
+import * as firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
 
 export class Note {
   name: string;
-  createdOn: Date;
+  createdOn: Timestamp;
   pinned: boolean;
   recallNotePairs: RecallNotePair[];
 }

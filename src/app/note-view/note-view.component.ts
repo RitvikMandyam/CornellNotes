@@ -30,7 +30,7 @@ export class NoteViewComponent implements OnInit, AfterViewInit {
     this.largestIndex = 1;
     this.note = {
       name: 'Unnamed Note',
-      createdOn: new Date(),
+      createdOn: Timestamp.now(),
       pinned: false,
       recallNotePairs: [{
         index: this.largestIndex,
@@ -101,7 +101,7 @@ export class NoteViewComponent implements OnInit, AfterViewInit {
     this.db.collection(environment.firebaseCollections.users).doc(this.user.uid).collection('notes').get()
       .subscribe((notesQuery) => {
         const notes: Note[] = notesQuery.docs.length > 0 ? notesQuery.docs.map(e => e.data()) as unknown as Note[] : [];
-        let noteIndex = notes.findIndex(e => (e.createdOn as unknown as Timestamp).toDate().toString() === this.note.createdOn.toString());
+        let noteIndex = notes.findIndex(e => e.createdOn.isEqual(this.note.createdOn));
 
         for (let i = 0; i < this.mementosUndoStack.length; i++) {
           // If we create a recall-note pair after undoing a swap, the existing swap entries don't contain it.

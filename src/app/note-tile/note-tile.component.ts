@@ -17,7 +17,6 @@ export class NoteTileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.note.createdOn = (this.note.createdOn as unknown as Timestamp).toDate();
   }
   deleteAction(event) {
     event.stopPropagation();
